@@ -26,12 +26,12 @@ class App(QApplication):
         self.ui.show()
 
     def open_sap_gui(self):
-        handle = gw.getWindowsWithTitle('AutoJob2.0 – main.py')[0]
+        handle = gw.getWindowsWithTitle('AutoJob2.0')[0]
         handle.activate()
         pyautogui.hotkey("shift", "f10")
 
     def close_sap_gui(self):
-        handle = gw.getWindowsWithTitle('AutoJob2.0 – main.py')[0]
+        handle = gw.getWindowsWithTitle('AutoJob2.0')[0]
         handle.activate()
         pyautogui.hotkey("ctrl", "f2")
 

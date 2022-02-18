@@ -4,7 +4,7 @@ import sys
 from PySide6.QtCore import QFile, QIODevice
 from PySide6.QtWidgets import QApplication
 from PySide6.QtUiTools import QUiLoader
-
+import psutil
 
 ui_file_name = "quit.ui"
 ui_file = QFile(ui_file_name)
@@ -30,10 +30,17 @@ class App(QApplication):
         handle.activate()
         pyautogui.hotkey("shift", "f10")
 
+    def kill_process(self, process_name):
+        processes = filter(lambda p: p.name() == 'python.exe', psutil.process_iter())
+        for process in processes:
+            if process_name in psutil.Process(process.pid).exe():
+                process.kill()
+                break
+
+
     def close_sap_gui(self):
-        handle = gw.getWindowsWithTitle('AutoJob2.0')[0]
-        handle.activate()
-        pyautogui.hotkey("ctrl", "f2")
+        self.kill_process("AutoJob2.0")
+
 
     def start_auto_clicker(self):
         handle = gw.getWindowsWithTitle('AutoClicker – main.py')[0]
